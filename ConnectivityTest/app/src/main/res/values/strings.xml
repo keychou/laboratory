@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ConnectivityTest</string>
+    <string name="status">status</string>
+    <string name="network">network</string>
+    <string name="wifi">wifi</string>
+    <string name="mobile">mobile</string>
+    <string name="set_wifi">set wifi</string>
+    <string name="set_data">set data</string>
+    <string name="Switch">Switch</string>
+</resources>

@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">PhoneInfoTest</string>
+
+    <string-array name="simstate">
+        <item>SIM_STATE_UNKNOWN</item>
+        <item>SIM_STATE_ABSENT</item>
+        <item>SIM_STATE_PIN_REQUIRED</item>
+        <item>SIM_STATE_PUK_REQUIRED</item>
+        <item>SIM_STATE_NETWORK_LOCKED</item>
+        <item>SIM_STATE_READY</item>
+        <item>SIM_STATE_NOT_READY</item>
+        <item>SIM_STATE_PERM_DISABLED</item>
+        <item>SIM_STATE_CARD_IO_ERROR</item>
+    </string-array>
+
+    <string-array name="statusNames">
+        <item>手机号码(MSISDN)</item>
+        <item>国际移动用户识别码(IMSI)</item>
+        <item>国际移动设备身份码(IMEI/MEID)</item>
+        <item>SIM卡卡号(ICCID)</item>
+        <item>设备通话状态(call status)</item>
+        <item>data network type</item>
+        <item>sim state</item>
+        <item>sim operator</item>
+        <item>sim country iso</item>
+        <item>sim operator name</item>
+        <item>voice mail number</item>
+
+        <item>bt mac</item>
+
+    </string-array>
+
+
+    <string-array name="callStatus">
+        <item>空闲(CALL_STATE_IDLE)</item>
+        <item>来电(CALL_STATE_RINGING)</item>
+        <item>通话中(CALL_STATE_OFFHOOK)</item>
+    </string-array>
+
+    <string-array name="dataNetworkTypes">
+        <item>NETWORK_TYPE_UNKNOWN</item>
+        <item>NETWORK_TYPE_GPRS</item>
+        <item>NETWORK_TYPE_EDGE</item>
+        <item>NETWORK_TYPE_UMTS</item>
+        <item>NETWORK_TYPE_HSDPA</item>
+        <item>NETWORK_TYPE_HSUPA</item>
+        <item>NETWORK_TYPE_HSPA</item>
+        <item>NETWORK_TYPE_CDMA</item>
+        <item>NETWORK_TYPE_EVDO_0</item>
+        <item>NETWORK_TYPE_EVDO_A</item>
+        <item>NETWORK_TYPE_EVDO_B</item>
+        <item>NETWORK_TYPE_1xRTT</item>
+        <item>NETWORK_TYPE_IDEN</item>
+        <item>NETWORK_TYPE_LTE</item>
+        <item>NETWORK_TYPE_EHRPD</item>
+        <item>NETWORK_TYPE_HSPAP</item>
+    </string-array>
+
+
+
+
+
+</resources>

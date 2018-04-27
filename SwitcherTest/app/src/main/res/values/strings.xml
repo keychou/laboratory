@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SwitcherTest</string>
+    <string name="note_lte_on">LTE频段开启成功,重启后生效</string>
+    <string name="note_lte_off">LTE频段关闭成功,重启后生效</string>
+</resources>

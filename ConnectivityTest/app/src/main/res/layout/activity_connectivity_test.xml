@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/activity_connectivity_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhoukaihffoxmail.connectivitytest.ConnectivityTest"
+    android:weightSum="1">
+
+    <Button
+        android:text="@string/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/get_network_status" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="127dp"
+            android:layout_height="match_parent"
+            android:text="@string/network"
+            android:id="@+id/network" />
+
+        <TextView
+            android:layout_width="235dp"
+            android:layout_height="match_parent"
+            android:text=""
+            android:id="@+id/network_show"
+            android:layout_weight="0.91" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="154dp"
+            android:layout_height="match_parent"
+            android:text="@string/wifi"
+            android:id="@+id/wifi" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/wifi_show" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="154dp"
+            android:layout_height="match_parent"
+            android:text="@string/mobile"
+            android:id="@+id/mobile" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/mobile_show" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:weightSum="1">
+
+        <Switch
+            android:text="@string/set_wifi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch_wifi" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:weightSum="1">
+
+        <Switch
+            android:text="@string/set_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch_data" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
