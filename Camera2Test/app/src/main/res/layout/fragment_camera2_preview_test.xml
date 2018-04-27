@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.quectel.camera2test.Camera2PreviewTestFragment">
+
+    <TextureView
+        android:id="@+id/textureView"
+        android:layout_width="333dp"
+        android:layout_height="453dp" />
+
+</FrameLayout>
