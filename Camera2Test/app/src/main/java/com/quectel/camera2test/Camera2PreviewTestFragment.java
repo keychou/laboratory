@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -74,7 +75,10 @@ public class Camera2PreviewTestFragment extends Fragment {
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture texture) {
+
             Log.d(TAG, "--mTextureView onSurfaceTextureUpdated--");
+            Bitmap bitmap= mTextureView.getBitmap();
+            Log.d(TAG, "--mTextureView bitmap = " + bitmap.getByteCount());
         }
 
     };

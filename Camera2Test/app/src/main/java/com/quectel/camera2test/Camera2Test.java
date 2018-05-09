@@ -12,8 +12,14 @@ public class Camera2Test extends AppCompatActivity {
 
         if (null == savedInstanceState) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2PreviewTestFragment.newInstance())
+                    .replace(R.id.container, Camera2VideoFragment.newInstance())
                     .commit();
         }
+
+//        if (null == savedInstanceState) {
+//            getFragmentManager().beginTransaction()
+//                    .replace(R.id.container, Camera2VideoFragment.newInstance())
+//                    .commit();
+//        }
     }
 }
