@@ -1,0 +1,112 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.quectel.camerademo.DualCameraTestFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <SurfaceView
+            android:id="@+id/svFront"
+            android:keepScreenOn="true"
+            android:layout_width="match_parent"
+            android:layout_height="138dp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="92dp"
+            android:id="@+id/camera_info_front" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"></LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <SurfaceView
+            android:id="@+id/svBack"
+            android:keepScreenOn="true"
+            android:layout_width="match_parent"
+            android:layout_height="131dp" />
+
+        <TextView
+            android:layout_width="206dp"
+            android:layout_height="92dp"
+            android:id="@+id/camera_info_back" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="113dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="前摄拍照"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/snap_front"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="后摄拍照"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/snap_back"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Switch
+                android:text="前摄预览录像"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/front_preview_record"
+                android:layout_weight="0.70" />
+
+            <Switch
+                android:text="前摄录像"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/front_record"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Switch
+                android:text="后摄预览录像"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/back_preview_record"
+                android:layout_weight="0.71" />
+
+            <Switch
+                android:text="后摄录像"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/back_record"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

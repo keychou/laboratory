@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CameraDemo</string>
+    <string name="dual_camera_test">dual camera test</string>
+    <string name="single_camera_test">single camera test</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_single_blank_fragment">Hello single blank fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_dual_blank_fragment">Hello dual blank fragment</string>
+</resources>

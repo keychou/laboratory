@@ -1,0 +1,63 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.quectel.camerademo.SingleCameraTestFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:weightSum="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <SurfaceView
+                android:id="@+id/surfaceview"
+                android:keepScreenOn="true"
+                android:layout_width="match_parent"
+                android:layout_height="398dp" />
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="92dp"
+                android:id="@+id/camera_info" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+
+            <Button
+                android:id="@+id/capture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="take pic" />
+
+            <Button
+                android:id="@+id/record_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="record main"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/record_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="record sub"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
