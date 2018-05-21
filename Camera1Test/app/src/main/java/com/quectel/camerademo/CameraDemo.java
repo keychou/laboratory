@@ -25,7 +25,7 @@ public class CameraDemo extends AppCompatActivity implements DefaultFragment.OnF
 
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, DefaultFragment.newInstance("str1", "str2"))
+                .replace(R.id.container, TsFromatRecordTestFragment.newInstance("str1", "str2"))
                 .commit();
 
     }
