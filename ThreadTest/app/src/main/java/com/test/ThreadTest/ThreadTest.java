@@ -59,6 +59,14 @@ public class ThreadTest extends Activity {
         start_timetask = (Button) findViewById(R.id.start_timetask);
         start_excutor = (Button) findViewById(R.id.start_excutor);
 
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).start();
+
         start_thread.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
