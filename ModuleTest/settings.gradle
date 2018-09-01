@@ -1,0 +1,1 @@
+include ':app', ':tf-sqlite-ext'
