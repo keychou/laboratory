@@ -116,7 +116,6 @@ public class SingleCameraTestFragment extends Fragment implements View.OnClickLi
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
         btRecordMain = (Button)view.findViewById(R.id.record_main);
-        btRecordSub = (Button)view.findViewById(R.id.record_sub);
         btTakePic =(Button)view.findViewById(R.id.capture);
 
         tvShowCameraInfo = (TextView) view.findViewById(R.id.camera_info);
@@ -192,11 +191,6 @@ public class SingleCameraTestFragment extends Fragment implements View.OnClickLi
                     stopFrontRecording();
                     ((Button) v).setText("录像/前");
                 }
-                break;
-            case R.id.record_sub:
-
-                camera.setPreviewCallback(new PreviewStreamRecorder(cameraId));
-
                 break;
             default:
                 break;
@@ -375,7 +369,7 @@ public class SingleCameraTestFragment extends Fragment implements View.OnClickLi
         public void surfaceCreated(SurfaceHolder holder) {
             // TODO Auto-generated method stub
 
-            cameraId = 0; //findFirstfrontFacingCamera();
+            cameraId = 1; //findFirstfrontFacingCamera();
             Log.d(TAG, "cameraId = " + cameraId);
             camera = Camera.open(cameraId);
 

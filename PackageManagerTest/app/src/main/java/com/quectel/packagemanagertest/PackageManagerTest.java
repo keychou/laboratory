@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.UserHandle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,7 +81,8 @@ public class PackageManagerTest extends AppCompatActivity {
                 break;
             }
         }
-
+        SystemProperties
+       // context.sendBroadcastAsUser(intent1, UserHandle.ALL)
         return isAtServiceInstalled;
     }
 

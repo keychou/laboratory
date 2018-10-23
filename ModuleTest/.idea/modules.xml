@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/ModuleTest.iml" filepath="$PROJECT_DIR$/ModuleTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tf-sqlite-ext/tf-sqlite-ext.iml" filepath="$PROJECT_DIR$/tf-sqlite-ext/tf-sqlite-ext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tf-storage-ext/tf-storage-ext.iml" filepath="$PROJECT_DIR$/tf-storage-ext/tf-storage-ext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tf-storage-ext/tf-storage-ext.iml" filepath="$PROJECT_DIR$/tf-storage-ext/tf-storage-ext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ts-storage-ext/ts-storage-ext.iml" filepath="$PROJECT_DIR$/ts-storage-ext/ts-storage-ext.iml" />
     </modules>
   </component>
 </project>

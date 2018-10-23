@@ -77,8 +77,8 @@ public class Camera2PreviewTestFragment extends Fragment {
         public void onSurfaceTextureUpdated(SurfaceTexture texture) {
 
             Log.d(TAG, "--mTextureView onSurfaceTextureUpdated--");
-            Bitmap bitmap= mTextureView.getBitmap();
-            Log.d(TAG, "--mTextureView bitmap = " + bitmap.getByteCount());
+            //Bitmap bitmap= mTextureView.getBitmap();
+            //Log.d(TAG, "--mTextureView bitmap = " + bitmap.getByteCount());
         }
 
     };
@@ -224,7 +224,7 @@ public class Camera2PreviewTestFragment extends Fragment {
             assert texture != null;
 
             // We configure the size of default buffer to be the size of camera preview we want.
-            texture.setDefaultBufferSize(720, 1280);
+            texture.setDefaultBufferSize(1280, 720);
 
             // This is the output Surface we need to start preview.
             Surface surface = new Surface(texture);

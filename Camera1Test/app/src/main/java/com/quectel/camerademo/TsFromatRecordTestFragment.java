@@ -19,13 +19,15 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by klein on 18-5-17.
  */
 
-public class TsFromatRecordTestFragment  extends Fragment implements View.OnClickListener {
+public class TsFromatRecordTestFragment  extends Fragment implements View.OnClickListener, MediaRecorder.OnInfoListener {
 
 
     public static final String TAG = "CameraDemo.SCTF";
@@ -43,6 +45,16 @@ public class TsFromatRecordTestFragment  extends Fragment implements View.OnClic
     FileUtils fileUtils = new FileUtils();
 
     CameraSettings frontCameraInfo;
+
+    @Override
+    public void onInfo(MediaRecorder mediaRecorder, int i, int i1) {
+        Log.d(TAG, "mediaRecorder = " + mediaRecorder + ", i = " + i);
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        String date = df.format(new Date());
+        String path = "/sdcard/DCIM/" + date + ".ts";
+        Log.d(TAG, "path = " + path);
+        //mMainMediaRecorder.setSwapFile(path);
+    }
 
     private TsFromatRecordTestFragment.OnFragmentInteractionListener mListener;
 
@@ -154,25 +166,20 @@ public class TsFromatRecordTestFragment  extends Fragment implements View.OnClic
 
                 break;
             case R.id.record_main:
-                Log.d(TAG, "record main stream");
+                Log.d(TAG, "record stream");
                 if (mMainMediaRecorder == null)
                 {
                     if (camera != null)
                     {
-                        Log.e(TAG, "start main recorder prepare");
+                        Log.e(TAG, "start recorder prepare");
                         startFrontRecording();
-                        ((Button) v).setText("停止/前");
+                        ((Button) v).setText("stop");
                     }
                 } else
                 {
                     stopFrontRecording();
-                    ((Button) v).setText("录像/前");
+                    ((Button) v).setText("record");
                 }
-                break;
-            case R.id.record_sub:
-
-                camera.setPreviewCallback(new PreviewStreamRecorder(cameraId));
-
                 break;
             default:
                 break;
@@ -225,7 +232,7 @@ public class TsFromatRecordTestFragment  extends Fragment implements View.OnClic
 
     public boolean startFrontRecording() {
         if (prepareFrontVideoRecorder()) {
-            Log.e(TAG, "media recorder start");
+            Log.d(TAG, "media recorder start");
             mMainMediaRecorder.start();
             return true;
         } else {
@@ -249,8 +256,8 @@ public class TsFromatRecordTestFragment  extends Fragment implements View.OnClic
         mMainMediaRecorder.setCamera(camera);
         mMainMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMainMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-        mMainMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        //mMainMediaRecorder.setOutputFormat(/*MediaRecorder.OutputFormat.MPEG_4*/8);
+        //mMainMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        mMainMediaRecorder.setOutputFormat(/*MediaRecorder.OutputFormat.MPEG_2_TS*/8);
         mMainMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         mMainMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
         mMainMediaRecorder.setVideoSize(1280, 720);
@@ -258,9 +265,10 @@ public class TsFromatRecordTestFragment  extends Fragment implements View.OnClic
         mMainMediaRecorder.setAudioEncodingBitRate(44100);
         mMainMediaRecorder.setVideoFrameRate(30);
         mMainMediaRecorder.setMaxDuration(-1);
-        mMainMediaRecorder.setOutputFile("/sdcard/DCIM/002.ts");
+        mMainMediaRecorder.setOutputFile("/sdcard/DCIM/000.ts");
         mMainMediaRecorder.setPreviewDisplay(svShowPreview.getHolder().getSurface());
 
+        mMainMediaRecorder.setOnInfoListener(this);
 
         try {
             mMainMediaRecorder.prepare();

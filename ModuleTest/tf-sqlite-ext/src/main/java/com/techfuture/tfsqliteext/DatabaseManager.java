@@ -29,7 +29,6 @@ public class DatabaseManager {
             //Cursor cursor = db.rawQuery("select * from mbn_list_msg", null);
 
             int rowsnum = mCursor.getCount();
-
             Log.d(TAG, "total rows = " + rowsnum);
         } catch (Exception e){
             Log.d(TAG, "fail to open " + path);

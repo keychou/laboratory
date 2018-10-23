@@ -294,7 +294,7 @@ public class DualCameraTestFragment extends Fragment implements View.OnClickList
         public void surfaceCreated(SurfaceHolder holder) {
             // TODO Auto-generated method stub
 
-            cameraIdFront = mCameraManagerGlobal.findFirstfrontFacingCamera();
+            cameraIdFront = 1; //mCameraManagerGlobal.findFirstfrontFacingCamera();
             Log.d(TAG, "cameraId = " + cameraIdFront);
             cameraFront = Camera.open(cameraIdFront);
 
@@ -334,7 +334,7 @@ public class DualCameraTestFragment extends Fragment implements View.OnClickList
         public void surfaceCreated(SurfaceHolder holder) {
             // TODO Auto-generated method stub
 
-            cameraIdBack = mCameraManagerGlobal.findFirstBackFacingCamera();
+            cameraIdBack = 2; //mCameraManagerGlobal.findFirstBackFacingCamera();
             Log.d(TAG, "cameraId = " + cameraIdBack);
             cameraBack = Camera.open(cameraIdBack);
 
@@ -386,9 +386,9 @@ public class DualCameraTestFragment extends Fragment implements View.OnClickList
 
 
 
-            // parameters.setPreviewFormat(ImageFormat.NV21);
-            parameters.set("preview-format", "yuv420sp");
-            camera.setParameters(parameters);
+//            // parameters.setPreviewFormat(ImageFormat.NV21);
+//            parameters.set("preview-format", "yuv420sp");
+//            camera.setParameters(parameters);
 
             Log.d(TAG, "svShowPreview.getHolder() = " + svShowPreviewFront.getHolder().getSurface());
             camera.setPreviewDisplay(svShowPreviewFront.getHolder());
@@ -462,8 +462,8 @@ public class DualCameraTestFragment extends Fragment implements View.OnClickList
 
 
             // parameters.setPreviewFormat(ImageFormat.NV21);
-            parameters.set("preview-format", "yuv420sp");
-            camera.setParameters(parameters);
+//            parameters.set("preview-format", "yuv420sp");
+//            camera.setParameters(parameters);
 
             Log.d(TAG, "svShowPreview.getHolder() = " + svShowPreviewBack.getHolder().getSurface());
             camera.setPreviewDisplay(svShowPreviewBack.getHolder());

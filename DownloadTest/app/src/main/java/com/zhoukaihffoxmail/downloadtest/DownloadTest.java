@@ -27,12 +27,16 @@ import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DownloadTest extends Activity {
     public static final String TAG= "DownloadTest";
     private Button btDownload, btOpenGprs;
     public boolean isGprsConnected = false;
     TextView tvShowStatus;
+    int mDownloadCount = 0;
+    boolean mDownloadStart = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,12 @@ public class DownloadTest extends Activity {
                 isGprsConnected = true;
                 Log.d(TAG, "Connect to GPRS");
                 connectivityManager.setProcessDefaultNetwork(network);
+
+                if (!mDownloadStart){
+                    mDownloadStart = true;
+                    //scheduleDownload();
+                    //mScheduleHandler1.postDelayed(r1, 10*1000);
+                }
             }
 
             public void onLosing(Network network, int maxMsToLive) {
@@ -158,6 +168,22 @@ public class DownloadTest extends Activity {
 
     }
 
+    Handler mScheduleHandler1 = new Handler();
+    Runnable r1 = new Runnable() {
+        @Override
+        public void run() {
+            scheduleDownload();
+            mScheduleHandler1.postDelayed(r1, 10*1000);
+        }
+    };
+
+
+    public void scheduleDownload(){
+        Log.d(TAG, "scheduleDownload : " + (++mDownloadCount));
+        DownloadThread downloadThread = new DownloadThread(new MyHandler());
+        new Thread(downloadThread, "downloadThread").start();
+    }
+
     public class Status{
         public static final int GPRS_CONNECTED = 0x01 << 1;
         public static final int GPRS_DISCONNECTED = 0x01 << 2;
@@ -217,9 +243,9 @@ public class DownloadTest extends Activity {
             msg.sendToTarget();
 
             //start to do network operations,like download a file
-            String urlStr="http://xz.cr173.com/soft1/sqlitespy_gr.zip";
+            String urlStr="http://cn.archive.ubuntu.com/ubuntu/pool/universe/0/0ad-data/0ad-data-common_0.0.15-1_all.deb";
             String path="file";
-            String fileName="sqlitespy_gr.zip";
+            String fileName="0ad-data-common_0.0.15-1_all.deb";
             OutputStream output=null;
             try {
                 /*
@@ -243,13 +269,20 @@ public class DownloadTest extends Activity {
                  * 6.关闭流
                  */
                 String SDCard= Environment.getExternalStorageDirectory()+"";
-                String pathName=SDCard+"/"+path+"/"+fileName;//文件存储路径
+//                String pathName=SDCard+"/"+path+"/"+fileName + mDownloadCount;//文件存储路径
+//
+//                File file=new File(pathName);
+//                InputStream input=conn.getInputStream();
+//
+//                String dir=SDCard+"/"+path;
+//                new File(dir).mkdir(); //新建文件夹
+//                file.createNewFile();  //新建文件
+
+                String pathName= "/mnt/media_rw/FC2D-1646/"+ fileName + mDownloadCount;//文件存储路径
+                Log.d(TAG, "pathName = " + pathName);
 
                 File file=new File(pathName);
                 InputStream input=conn.getInputStream();
-
-                String dir=SDCard+"/"+path;
-                new File(dir).mkdir(); //新建文件夹
                 file.createNewFile();  //新建文件
                 output=new FileOutputStream(file);
                 //读取大文件

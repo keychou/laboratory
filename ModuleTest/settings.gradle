@@ -1,1 +1,1 @@
-include ':app', ':tf-sqlite-ext'
+include ':app', ':tf-sqlite-ext', ':tf-storage-ext'

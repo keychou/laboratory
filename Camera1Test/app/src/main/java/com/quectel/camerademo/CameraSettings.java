@@ -13,8 +13,8 @@ public class CameraSettings {
 
     public static final String TAG = "MultiCamera:CameraInfo";
 
-    static public int IMAGE_WIDTH = 1920;
-    static public int IMAGE_HEIGHT = 1080;
+    static public int IMAGE_WIDTH = 1280;
+    static public int IMAGE_HEIGHT = 720;
 
     Camera targetCamera;
 
