@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceCategory android:title="First Category">
+    <PreferenceCategory android:key="firstcatagory" android:title="First Category">
         <ListPreference
             android:key="list_key"
             android:defaultValue="list key default value"
