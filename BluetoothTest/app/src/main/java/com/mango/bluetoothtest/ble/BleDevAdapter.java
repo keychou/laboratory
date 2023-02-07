@@ -40,7 +40,7 @@ public class BleDevAdapter extends RecyclerView.Adapter<BleDevAdapter.VH> {
         }
     };
 
-    BleDevAdapter(Listener listener, BleClientActivity bleClientActivity) {
+    public BleDevAdapter(Listener listener) {
         mListener = listener;
         scanBle();
     }

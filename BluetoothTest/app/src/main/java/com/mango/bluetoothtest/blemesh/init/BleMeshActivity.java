@@ -110,7 +110,7 @@ public class BleMeshActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         long offset = Constants.NO_OFFSET;
-        canIBeServer = false;
+        canIBeServer = true;
         alreadyInizialized = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blemesh);
@@ -149,14 +149,11 @@ public class BleMeshActivity extends Activity {
             startServices.performClick();
         };
 
-        mBleDevAdapter = new BleDevAdapter(new BleDevAdapter.Listener() {
+        /*BleDevAdapter mBleDevAdapter = new BleDevAdapter(new BleDevAdapter.Listener() {
             @Override
             public void onItemClick(BluetoothDevice dev) {
-                closeConn();
-                mBluetoothGatt = dev.connectGatt(BleClientActivity.this, false, mBluetoothGattCallback); // 连接蓝牙设备
-                logTv(String.format("与[%s]开始连接............", dev));
             }
-        }, BleClientActivity.this);
+        });*/
 
 
         startServices.setOnClickListener(view -> {

@@ -11,9 +11,14 @@ import android.bluetooth.BluetoothGattServerCallback;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.le.AdvertiseCallback;
+import android.bluetooth.le.AdvertiseData;
+import android.bluetooth.le.AdvertiseSettings;
+import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.ParcelUuid;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,6 +38,7 @@ import com.mango.bluetoothtest.blemesh.server.ServerNode;
 import static com.mango.bluetoothtest.blemesh.common.ByteUtility.getBit;
 import static com.mango.bluetoothtest.blemesh.common.ByteUtility.printByte;
 import static com.mango.bluetoothtest.blemesh.common.ByteUtility.setBit;
+import static com.mango.bluetoothtest.blemesh.common.Constants.ServiceUUID;
 
 /**
  * lower tier del BLEServer, implementa le varie primitive di invio e ricezione messaggi, l'inizializzazione del server e la gestione degli errori di base
@@ -56,6 +62,9 @@ public class AcceptBLETask {
 
     private BluetoothGattCharacteristic mGattCharacteristicRoutingTable;
     private BluetoothGattDescriptor mGattDescriptorRoutingTable;
+
+    private BluetoothLeAdvertiser mBluetoothLeAdvertiser; // BLE广播
+    private BluetoothGattServer mBluetoothGattServer; // BLE服务端
 
     private BluetoothManager mBluetoothManager;
     private HashMap<String, String> messageMap;
@@ -84,7 +93,7 @@ public class AcceptBLETask {
         listenerHashMap = new HashMap<>();
         nearDeviceMap = null;
         routingTable = RoutingTable.getInstance();
-        mGattService = new BluetoothGattService(Constants.ServiceUUID, BluetoothGattService.SERVICE_TYPE_PRIMARY);
+        mGattService = new BluetoothGattService(ServiceUUID, BluetoothGattService.SERVICE_TYPE_PRIMARY);
         mGattCharacteristic = new BluetoothGattCharacteristic(Constants.CharacteristicUUID, BluetoothGattCharacteristic.PROPERTY_READ | BluetoothGattCharacteristic.PROPERTY_WRITE, BluetoothGattCharacteristic.PERMISSION_READ | BluetoothGattCharacteristic.PERMISSION_WRITE);
         mGattDescriptor = new BluetoothGattDescriptor(Constants.DescriptorUUID, BluetoothGattDescriptor.PERMISSION_READ | BluetoothGattDescriptor.PERMISSION_WRITE);
         mGattDescriptorNextId = new BluetoothGattDescriptor(Constants.NEXT_ID_UUID, BluetoothGattDescriptor.PERMISSION_READ | BluetoothGattDescriptor.PERMISSION_WRITE);
@@ -771,7 +780,7 @@ public class AcceptBLETask {
 
             @Override
             public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-                BluetoothGattService service = gatt.getService(Constants.ServiceUUID);
+                BluetoothGattService service = gatt.getService(ServiceUUID);
                 if (service == null) {
                     client.restartClient();
                     return;
@@ -837,7 +846,7 @@ public class AcceptBLETask {
                     Log.d(TAG, "OUD: " + "Write Characteristic :--> " + res);
                     gatt.executeReliableWrite();
                     Log.d(TAG, "OUD: " + "I wrote a characteristic nextServerId! " + new String(characteristic.getValue()));*/
-                    BluetoothGattService serv = gatt.getService(Constants.ServiceUUID);
+                    BluetoothGattService serv = gatt.getService(ServiceUUID);
                     if (serv == null) {
                         client.restartClient();
                         return;
@@ -874,16 +883,59 @@ public class AcceptBLETask {
         client.startClient();
     }
 
+    // BLE广播Callback
+    private AdvertiseCallback mAdvertiseCallback = new AdvertiseCallback() {
+        @Override
+        public void onStartSuccess(AdvertiseSettings settingsInEffect) {
+            Log.d(TAG, "BLE广播开启成功");
+        }
+
+        @Override
+        public void onStartFailure(int errorCode) {
+            Log.d(TAG, "BLE广播开启失败,错误码:" + errorCode);
+        }
+    };
+
     /**
      * if there are no near servers i have to be the first server online, else i'll ask to near servers
      */
     public void startServer() {
         Log.d(TAG, "OUD: " + "dev found:" + nearDeviceMap.size());
+        (new Exception("klein--startServer")).printStackTrace();
         if (nearDeviceMap != null && nearDeviceMap.keySet().size() != 0) {
             Log.d(TAG, "OUD: " + "startServer: Finding next id");
             initializeId(0);
         } else {
             setId("1");
+
+            BluetoothManager bluetoothManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
+//        BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+            // ============启动BLE蓝牙广播(广告) =================================================================================
+            //广播设置(必须)
+            AdvertiseSettings settings = new AdvertiseSettings.Builder()
+                    .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY) //广播模式: 低功耗,平衡,低延迟
+                    .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH) //发射功率级别: 极低,低,中,高
+                    .setConnectable(true) //能否连接,广播分为可连接广播和不可连接广播
+                    .build();
+            //广播数据(必须，广播启动就会发送)
+            AdvertiseData advertiseData = new AdvertiseData.Builder()
+                    .setIncludeDeviceName(true) //包含蓝牙名称
+                    .setIncludeTxPowerLevel(true) //包含发射功率级别
+                    .addManufacturerData(1, new byte[]{23, 33}) //设备厂商数据，自定义
+                    .build();
+            //扫描响应数据(可选，当客户端扫描时才发送)
+            AdvertiseData scanResponse = new AdvertiseData.Builder()
+                    .addManufacturerData(2, new byte[]{66, 66}) //设备厂商数据，自定义
+                    .addServiceUuid(new ParcelUuid(ServiceUUID)) //服务UUID
+                    .addServiceData(new ParcelUuid(ServiceUUID), new byte[]{2,3,12}) //服务数据，自定义
+                    .build();
+            mBluetoothLeAdvertiser = bluetoothAdapter.getBluetoothLeAdvertiser();
+            mBluetoothLeAdvertiser.startAdvertising(settings, advertiseData, scanResponse, mAdvertiseCallback);
+
+
+
             mNode = new ServerNode(id);
             if (Utility.isDeviceOnline(context))
                 mNode.setHasInternet(true);
@@ -1081,7 +1133,7 @@ public class AcceptBLETask {
                 @Override
                 public void onServicesDiscovered(BluetoothGatt gatt, int status) {
                     Log.d(TAG, "OUD: " + "GATT: " + gatt.toString());
-                    BluetoothGattService service = gatt.getService(Constants.ServiceUUID);
+                    BluetoothGattService service = gatt.getService(ServiceUUID);
                     if (service == null) {
                         connectBLETask.restartClient();
                         return;

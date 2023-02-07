@@ -126,7 +126,7 @@ public class BleClientActivity extends Activity {
                 mBluetoothGatt = dev.connectGatt(BleClientActivity.this, false, mBluetoothGattCallback); // 连接蓝牙设备
                 logTv(String.format("与[%s]开始连接............", dev));
             }
-        }, BleClientActivity.this);
+        });
         rv.setAdapter(mBleDevAdapter);
     }
 
