@@ -63,4 +63,11 @@
         android:text="@string/ble_server"
         app:layout_constraintTop_toBottomOf="@+id/btn_ble_client" />
 
+    <Button
+        android:id="@+id/btn_blemesh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="bleMesh"
+        android:text="@string/ble_mesh"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ble_server" />
 </androidx.constraintlayout.widget.ConstraintLayout>

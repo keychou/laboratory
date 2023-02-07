@@ -14,6 +14,7 @@
     <!--Android 6.0及后续版本扫描蓝牙,需要定位权限(进入GPS设置,可以看到蓝牙定位)-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- required = true 表示手机必须支持BLE，否则无法安装运行-->
     <uses-feature
@@ -60,6 +61,11 @@
         <activity
             android:name=".ble.BleServerActivity"
             android:label="@string/ble_server" />
+
+        <activity
+            android:name=".blemesh.init.BleMeshActivity"
+            android:label="@string/ble_mesh" />
+
     </application>
 
 </manifest>

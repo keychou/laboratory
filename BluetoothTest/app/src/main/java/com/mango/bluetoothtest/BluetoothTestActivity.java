@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.mango.bluetoothtest.ble.BleClientActivity;
 import com.mango.bluetoothtest.ble.BleServerActivity;
+import com.mango.bluetoothtest.blemesh.init.BleMeshActivity;
 import com.mango.bluetoothtest.bt.BtClientActivity;
 import com.mango.bluetoothtest.bt.BtServerActivity;
 
@@ -72,5 +73,9 @@ public class BluetoothTestActivity extends Activity {
 
     public void bleServer(View view) {
         startActivity(new Intent(this, BleServerActivity.class));
+    }
+
+    public void bleMesh(View view) {
+        startActivity(new Intent(this, BleMeshActivity.class));
     }
 }
