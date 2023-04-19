@@ -681,7 +681,7 @@ public class StateMachine {
         private boolean mHasQuit = false;
 
         /** The debug flag */
-        private boolean mDbg = false;
+        private boolean mDbg = true;
 
         /** The SmHandler object, identifies that message is internal */
         private static final Object mSmHandlerObj = new Object();
@@ -854,7 +854,7 @@ public class StateMachine {
                 mLogRecords.add(mSm, mMsg, mSm.getLogRecString(mMsg), msgProcessedState, orgState,
                         mDestState);
             }
-
+            if (mDbg) mSm.log("klein----mDestState = " + mDestState);
             State destState = mDestState;
             if (destState != null) {
                 /**
@@ -978,6 +978,9 @@ public class StateMachine {
          * @return the state that processed the message
          */
         private final State processMsg(Message msg) {
+            if (mDbg) {
+                mSm.log("mStateStackTopIndex = " + mStateStackTopIndex);
+            }
             StateInfo curStateInfo = mStateStack[mStateStackTopIndex];
             if (mDbg) {
                 mSm.log("processMsg: " + curStateInfo.state.getName());
@@ -1103,6 +1106,7 @@ public class StateMachine {
             mTempStateStackCount = 0;
             StateInfo curStateInfo = mStateInfo.get(destState);
             do {
+                mSm.log("klein--mTempStateStackCount = " + mTempStateStackCount);
                 mTempStateStack[mTempStateStackCount++] = curStateInfo;
                 curStateInfo = curStateInfo.parentStateInfo;
             } while ((curStateInfo != null) && !curStateInfo.active);
@@ -1127,7 +1131,7 @@ public class StateMachine {
                 mTempStateStack[mTempStateStackCount] = curStateInfo;
                 curStateInfo = curStateInfo.parentStateInfo;
             }
-
+            mSm.log("klein---mTempStateStackCount = " + mTempStateStackCount);
             // Empty the StateStack
             mStateStackTopIndex = -1;
 

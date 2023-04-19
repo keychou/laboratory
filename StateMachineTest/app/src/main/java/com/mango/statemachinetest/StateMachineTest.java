@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class StateMachineTest extends Activity {
-
     private static final String ENTER = "enter";
     private static final String EXIT = "exit";
     private static final String ON_QUITTING = "ON_QUITTING";
@@ -35,12 +34,14 @@ public class StateMachineTest extends Activity {
     }
 
     public void testHsm1() throws Exception {
-        if (DBG) tlog("testHsm1 E");
+        if (DBG) Log.d(TAG, "testHsm1 E");
 
         Hsm1 sm = Hsm1.makeHsm1();
 
         // Send messages
-        sm.sendMessage(Hsm1.CMD_1);
+        //Log.d(TAG, "klein------test1---------------");
+        //sm.sendMessage(Hsm1.CMD_1);
+        Log.d(TAG, "klein------test2---------------");
         sm.sendMessage(Hsm1.CMD_2);
 
         synchronized (sm) {
@@ -48,10 +49,10 @@ public class StateMachineTest extends Activity {
             try {
                 sm.wait();
             } catch (InterruptedException e) {
-                tloge("testHsm1: exception while waiting " + e.getMessage());
+                Log.d(TAG, "testHsm1: exception while waiting " + e.getMessage());
             }
         }
-        if (DBG) tlog("testStateMachineSharedThread X");
+        if (DBG) Log.d(TAG, "testStateMachineSharedThread X");
     }
 
     private void tlog(String s) {
